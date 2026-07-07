@@ -9,7 +9,7 @@ bot = telebot.TeleBot(TOKEN, threaded=False)
 app = Flask(__name__)
 
 # Base URL for your game's Web App (Change this to your actual game URL)
-WEBAPP_URL = "https://your-game-webapp.com"
+WEBAPP_URL = "https://poke-crimsonsky--viralhit77.replit.app/"
 
 @app.route('/' + TOKEN, methods=['POST'])
 def getMessage():
