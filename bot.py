@@ -23,15 +23,18 @@ def webhook():
     bot.remove_webhook()
     host_url = request.url_root.replace("http://", "https://")
     bot.set_webhook(url=host_url + TOKEN)
-    return "Bot is running perfectly!", 200
-
-# Helper function to create a hybrid button (TG action + WebApp)
+    return "Bot is running perfectly!", 
+# Helper function to create a proper Inline WebApp Button
 def make_hybrid_markup(button_text, webapp_path=""):
     markup = InlineKeyboardMarkup()
-    url = f"{WEBAPP_URL}/{webapp_path}" if webapp_path else WEBAPP_URL
-    markup.add(InlineKeyboardButton(text=button_text, webApp=WebAppInfo(url=url)))
+    # If you have a real web app, replace this URL string
+    base_url = "https://google.com" 
+    full_url = f"{base_url}/{webapp_path}" if webapp_path else base_url
+    
+    # Correct Telegram syntax for an inline webapp button
+    markup.add(InlineKeyboardButton(text=button_text, web_app=WebAppInfo(url=full_url)))
     return markup
-
+    
 # --- COMMAND HANDLERS ---
 
 @bot.message_handler(commands=['start', 'help'])
@@ -40,13 +43,16 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['hunt', 'safari', 'league'])
 def handle_hunting(message):
-    # Covers /hunt, /safari, and /league as they have the same mechanics
-    cmd = message.text.split()[0].replace('/', '')
+    # Safely extracts 'hunt', 'safari', or 'league'
+    cmd = message.text.split()[0].replace('/', '').split('@')[0].strip().lower()
+    display_name = cmd.capitalize()
+    
     bot.send_message(
         message.chat.id, 
-        f"🌲 Entering the {cmd.capitalize()} zone...", 
-        reply_markup=make_hybrid_markup(f"🎮 Open {cmd.capitalize()} Screen", webapp_path=cmd)
+        f"🌲 Entering the {display_name} zone...", 
+        reply_markup=make_hybrid_markup(f"🎮 Open {display_name} Screen", webapp_path=cmd)
     )
+    
 
 @bot.message_handler(commands=['teams'])
 def handle_teams(message):
