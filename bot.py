@@ -28,7 +28,7 @@ def webhook():
 def make_hybrid_markup(button_text, webapp_path=""):
     markup = InlineKeyboardMarkup()
     # If you have a real web app, replace this URL string
-    base_url = "https://google.com" 
+    base_url = "https://poke-crimsonsky--viralhit77.replit.app/" 
     full_url = f"{base_url}/{webapp_path}" if webapp_path else base_url
     
     # Correct Telegram syntax for an inline webapp button
