@@ -29,7 +29,7 @@ def make_hybrid_markup(button_text, webapp_path=""):
     markup = InlineKeyboardMarkup()
     
     # Your actual game base URL
-    base_url = "https://poke-crimsonsky-something.repl.co" 
+    base_url = "https://poke-crimsonsky--viralhit77.replit.app/" 
     
     # Clean the URL and append path
     base_url = base_url.rstrip('/')
