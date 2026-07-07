@@ -3,7 +3,8 @@ from flask import Flask, request
 import telebot
 
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN, threaded=False)
+
 
 app = Flask(__name__)
 
